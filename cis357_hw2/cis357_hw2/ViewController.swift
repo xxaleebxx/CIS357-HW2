@@ -18,8 +18,17 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    var latp1Val:Double = 0.0
+    var latp2Val:Double = 0.0
+    var longp1Val:Double = 0.0
+    var longp2Val:Double = 0.0
+    var bearingTemp:Double = 0.0
     var distance:Double = 0.0
 
+    @IBOutlet weak var latp1: DecimalMinusTextField!
+    @IBOutlet weak var longp1: DecimalMinusTextField!
+    @IBOutlet weak var latp2: DecimalMinusTextField!
+    @IBOutlet weak var longp2: DecimalMinusTextField!
     
     func calculateDistance(a:(Double), b:(Double))->Double {
         let result:Double = Double(a-b)
@@ -27,22 +36,43 @@ class ViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var latp1: DecimalMinusTextField!
-    @IBOutlet weak var latp2: DecimalMinusTextField!
-    @IBOutlet weak var longp1: DecimalMinusTextField!
-    @IBOutlet weak var longp2: DecimalMinusTextField!
     
     @IBOutlet weak var distanceResult: UILabel!
+    @IBOutlet weak var bearingResult: UILabel!
+    
+    
+    
     
     @IBAction func calcButton(_ sender: Any) {
-      latp1 = latp1.text
-      latp2 = latp2.text
-        distance = calculateDistance(a: latp1, b: latp2)
-        distanceResult.text = String(distance)
-        print(latp1)
+        latp1Val = Double(latp1.text!)!
+        latp2Val = Double(latp2.text!)!
+        distance = calculateDistance(a: latp1Val, b: latp2Val)
+        distanceResult.text = String(distance) + " kilometers"
+        
+        longp1Val = Double(longp1.text!)!
+        longp2Val = Double(longp2.text!)!
+        
+        let x = cos(latp2Val) * sin(abs(longp2Val - longp1Val))
+        let y = cos(latp1Val) * sin(latp2Val) - sin(latp1Val) * cos(latp2Val) * cos(abs(longp2Val - longp1Val))
+        bearingTemp = (100*(atan2(x,y) * 180.0 / Double.pi)).rounded() / 100
+        bearingResult.text = String(bearingTemp) + " degrees"
+        
+        self.view.endEditing(true)
+    }
+    
+    
+    @IBAction func clearButton(_ sender: Any) {
+        latp1.text = ""
+        latp2.text = ""
+        longp1.text = ""
+        longp2.text = ""
+        distanceResult.text = ""
+        bearingResult.text = ""
+        
+        
+        self.view.endEditing(true)
     }
     
     
 
 }
-

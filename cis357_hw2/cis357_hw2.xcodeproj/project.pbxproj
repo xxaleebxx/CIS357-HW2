@@ -17,6 +17,7 @@
 		023DE96C2ABF7EF2005716FA /* cis357_hw2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE96B2ABF7EF2005716FA /* cis357_hw2UITests.swift */; };
 		023DE96E2ABF7EF2005716FA /* cis357_hw2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE96D2ABF7EF2005716FA /* cis357_hw2UITestsLaunchTests.swift */; };
 		023DE97B2ABF7F73005716FA /* DecimalMinusTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE97A2ABF7F73005716FA /* DecimalMinusTextField.swift */; };
+		0253BBEA2AC0D65500D65D54 /* CLLocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253BBE92AC0D65500D65D54 /* CLLocationExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		023DE96B2ABF7EF2005716FA /* cis357_hw2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cis357_hw2UITests.swift; sourceTree = "<group>"; };
 		023DE96D2ABF7EF2005716FA /* cis357_hw2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cis357_hw2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		023DE97A2ABF7F73005716FA /* DecimalMinusTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalMinusTextField.swift; sourceTree = "<group>"; };
+		0253BBE92AC0D65500D65D54 /* CLLocationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				023DE9552ABF7EF2005716FA /* LaunchScreen.storyboard */,
 				023DE9582ABF7EF2005716FA /* Info.plist */,
 				023DE97A2ABF7F73005716FA /* DecimalMinusTextField.swift */,
+				0253BBE92AC0D65500D65D54 /* CLLocationExtensions.swift */,
 			);
 			path = cis357_hw2;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0253BBEA2AC0D65500D65D54 /* CLLocationExtensions.swift in Sources */,
 				023DE94F2ABF7EF0005716FA /* ViewController.swift in Sources */,
 				023DE94B2ABF7EF0005716FA /* AppDelegate.swift in Sources */,
 				023DE97B2ABF7F73005716FA /* DecimalMinusTextField.swift in Sources */,
