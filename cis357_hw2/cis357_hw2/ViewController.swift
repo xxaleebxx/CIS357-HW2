@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SettingsViewControllerDelegate {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,9 @@ class ViewController: UIViewController {
     var longp2Val:Double = 0.0
     var bearingTemp:Double = 0.0
     var distance:Double = 0.0
+    
+    var distanceUnits:String = "Kilometers"
+    var bearingUnits:String = "Degrees"
 
     @IBOutlet weak var latp1: DecimalMinusTextField!
     @IBOutlet weak var longp1: DecimalMinusTextField!
@@ -47,7 +52,7 @@ class ViewController: UIViewController {
         latp1Val = Double(latp1.text!)!
         latp2Val = Double(latp2.text!)!
         distance = calculateDistance(a: latp1Val, b: latp2Val)
-        distanceResult.text = String(distance) + " kilometers"
+        distanceResult.text = String(distance) + " \(distanceUnits)"
         
         longp1Val = Double(longp1.text!)!
         longp2Val = Double(longp2.text!)!
@@ -55,7 +60,7 @@ class ViewController: UIViewController {
         let x = cos(latp2Val) * sin(abs(longp2Val - longp1Val))
         let y = cos(latp1Val) * sin(latp2Val) - sin(latp1Val) * cos(latp2Val) * cos(abs(longp2Val - longp1Val))
         bearingTemp = (100*(atan2(x,y) * 180.0 / Double.pi)).rounded() / 100
-        bearingResult.text = String(bearingTemp) + " degrees"
+        bearingResult.text = String(bearingTemp) + " \(bearingUnits)"
         
         self.view.endEditing(true)
     }
@@ -72,6 +77,22 @@ class ViewController: UIViewController {
         
         self.view.endEditing(true)
     }
+    
+    func settingsChanged(distanceUnits: String, bearingUnits: String) {
+        self.bearingUnits = bearingUnits
+        self.distanceUnits = distanceUnits
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToSettings" {
+            if let dest = segue.destination as? SettingsViewController {
+                dest.delegate = self
+                dest.bearingUnits = self.bearingUnits
+                dest.distanceUnits = self.distanceUnits
+            }
+        }
+    }
+    
     
     
 
