@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  cis357_hw2
 //
-//  Created by Bryan Soriano on 9/23/23.
+//  Created by Bryan Soriano and Autumn Bertram on 9/23/23.
 //
 
 import UIKit
