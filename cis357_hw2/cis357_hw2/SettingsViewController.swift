@@ -49,6 +49,10 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelTap(_ sender: UIBarButtonItem) {
+        self.navigationController?.dismiss(animated: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

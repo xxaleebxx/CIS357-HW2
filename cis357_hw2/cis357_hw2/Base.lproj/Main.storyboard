@@ -13,11 +13,11 @@
             <objects>
                 <navigationController id="QBQ-hj-kFV" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0bT-hL-nCR">
-                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zq6-6F-jwP"/>
+                        <segue destination="YcV-h5-o5E" kind="relationship" relationship="rootViewController" id="sK7-j4-Xqc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWc-co-9nk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -29,7 +29,7 @@
             <objects>
                 <viewController id="YcV-h5-o5E" customClass="SettingsViewController" customModule="cis357_hw2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rlG-lQ-xoK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance Units:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5d-nS-Vwn">
@@ -68,7 +68,13 @@
                         <viewLayoutGuide key="safeArea" id="1tm-Af-y5d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" customizationIdentifier="" id="5tV-vS-rqu"/>
+                    <navigationItem key="navigationItem" title="Settings" customizationIdentifier="" id="5tV-vS-rqu">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="eoh-B8-2XU">
+                            <connections>
+                                <action selector="cancelTap:" destination="YcV-h5-o5E" id="fcq-mj-usG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bearingText" destination="1hQ-bZ-Iy2" id="0NS-K2-pHR"/>
                         <outlet property="distanceText" destination="uIp-ld-6FN" id="54i-AK-2Vn"/>
@@ -77,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1M-Ib-MFn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-687.20000000000005" y="384.97536945812811"/>
+            <point key="canvasLocation" x="-2585" y="691"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -93,7 +99,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Settings"/>
                                 <connections>
-                                    <segue destination="YcV-h5-o5E" kind="show" identifier="goToSettings" id="hCr-fv-t2P"/>
+                                    <segue destination="QBQ-hj-kFV" kind="presentation" id="A6S-hM-792"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcI-Hr-B9r">
@@ -181,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-15" y="-258"/>
+            <point key="canvasLocation" x="-2481" y="-208"/>
         </scene>
     </scenes>
     <resources>
