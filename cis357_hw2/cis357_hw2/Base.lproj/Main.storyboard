@@ -11,9 +11,9 @@
         <!--Navigation Controller-->
         <scene sceneID="B2F-kj-hdS">
             <objects>
-                <navigationController id="QBQ-hj-kFV" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="QBQ-hj-kFV" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0bT-hL-nCR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -27,9 +27,9 @@
         <!--Settings-->
         <scene sceneID="cWh-AQ-ZCj">
             <objects>
-                <viewController id="YcV-h5-o5E" customClass="SettingsViewController" customModule="cis357_hw2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="YcV-h5-o5E" customClass="SettingsViewController" customModule="cis357_hw2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rlG-lQ-xoK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance Units:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5d-nS-Vwn">
@@ -68,13 +68,29 @@
                         <viewLayoutGuide key="safeArea" id="1tm-Af-y5d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Settings" customizationIdentifier="" id="5tV-vS-rqu">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="eoh-B8-2XU">
                             <connections>
-                                <action selector="cancelTap:" destination="YcV-h5-o5E" id="fcq-mj-usG"/>
+                                <action selector="cancelButton:" destination="YcV-h5-o5E" id="cPo-LB-xwI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="E99-o9-TvA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gCg-WW-Sj3">
+                                <rect key="frame" x="276" y="5" width="83" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="YcV-h5-o5E" eventType="touchUpInside" id="eCA-ME-Wbk"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="saveButton:" destination="YcV-h5-o5E" id="ZEH-2e-MoW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bearingText" destination="1hQ-bZ-Iy2" id="0NS-K2-pHR"/>
                         <outlet property="distanceText" destination="uIp-ld-6FN" id="54i-AK-2Vn"/>
