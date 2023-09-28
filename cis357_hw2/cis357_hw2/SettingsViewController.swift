@@ -11,7 +11,11 @@ protocol SettingsViewControllerDelegate {
     func settingsChanged(distanceUnits: String, bearingUnits: String)
 }
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController{
+    
+    @IBOutlet weak var distanceText: UILabel!
+    @IBOutlet weak var bearingText: UILabel!
+    @IBOutlet weak var picker: UIPickerView!
     
     var pickerData: [String] = [String]()
     var distanceUnits: String = ""
@@ -19,10 +23,11 @@ class SettingsViewController: UIViewController {
     var delegate : SettingsViewControllerDelegate?
     
     
-    @IBOutlet weak var picker: UIPickerView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        picker.dataSource = self
+        picker.delegate = self
 
         // Do any additional setup after loading the view.
         if picker.tag == 0 {
@@ -47,22 +52,32 @@ class SettingsViewController: UIViewController {
         else {
             self.picker.selectRow(0, inComponent: 0, animated: true)
         }
-    }
-    
-    @IBAction func cancelTap(_ sender: UIBarButtonItem) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         
-        if let d = self.delegate {
-            d.settingsChanged(distanceUnits: distanceUnits, bearingUnits: bearingUnits)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        distanceText.isUserInteractionEnabled = true
+        distanceText.addGestureRecognizer(tapGesture)
+        bearingText.isUserInteractionEnabled = true
+        bearingText.addGestureRecognizer(tapGesture)
+            
         }
-    }
     
-    @IBOutlet weak var distanceText: UILabel!
-    @IBOutlet weak var bearingText: UILabel!
+    @objc func tap() {
+        if picker.isHidden {
+            picker.isHidden = false
+        }
+        else {
+                picker.isHidden = true
+            }
+        }
+    
+    
+    
+    }
+
+
+    
+
+    
     
     
     
@@ -78,7 +93,7 @@ class SettingsViewController: UIViewController {
     }
     */
 
-}
+
 
 extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -101,6 +116,7 @@ extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate 
             self.bearingUnits = self.pickerData[row]
         }
     }
+    
     
     
 }
