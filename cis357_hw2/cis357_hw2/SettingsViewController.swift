@@ -30,9 +30,12 @@ class SettingsViewController: UIViewController{
     var saveDistanceText: String = ""
     var saveBearingText: String = ""
     
+    var selectedDistanceRow = 0
+    var selectedBearingRow = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         picker.dataSource = self
         picker.delegate = self
 
@@ -46,6 +49,9 @@ class SettingsViewController: UIViewController{
         
         self.picker.delegate = self
         self.picker.dataSource = self
+        
+        selectedDistanceRow = picker.selectedRow(inComponent: 0)
+        selectedBearingRow = picker.selectedRow(inComponent: 0)
         
         if self.picker.tag == 1 {
             if let index = pickerData.firstIndex(of: self.bearingUnits){
@@ -61,7 +67,7 @@ class SettingsViewController: UIViewController{
             self.picker.selectRow(0, inComponent: 0, animated: true)
         }
         
-        
+
         let distanceTapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         distanceText.isUserInteractionEnabled = true
         distanceText.addGestureRecognizer(distanceTapGesture)
@@ -71,6 +77,9 @@ class SettingsViewController: UIViewController{
         
         originalDistanceText = distanceText.text!
         originalBearingText = bearingText.text!
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOutside(_:)))
+            view.addGestureRecognizer(tapGestureRecognizer)
     
             
         }
@@ -84,6 +93,16 @@ class SettingsViewController: UIViewController{
     
     
     
+    @objc func tapOutside(_ sender: UITapGestureRecognizer) {
+        let tap = sender.location(in: view)
+        
+        if !picker.frame.contains(tap) && !distanceText.frame.contains(tap) && !bearingText.frame.contains(tap) {
+            picker.isHidden = true
+        }
+    }
+
+    
+    
     //There is an issue where if you change the distanceText to miles(2nd field in picker), and then click on the bearingText, it auto updates it to the 2nd field in picker.
     @objc func tap(_ text: UITapGestureRecognizer) {
 
@@ -91,13 +110,15 @@ class SettingsViewController: UIViewController{
                 self.pickerData = ["Kilometers", "Miles"]
                 let selected = picker.selectedRow(inComponent: 0)
                 distanceText.text = pickerData[selected]
-                saveDistanceText = distanceText.text!
+                picker.selectRow(selectedDistanceRow, inComponent: 0, animated: true)
+                saveDistanceText = pickerData[selected]
             }
             else if text.view == bearingText {
                 self.pickerData = ["Degrees", "Mils"]
                 let selected = picker.selectedRow(inComponent: 0)
                 bearingText.text = pickerData[selected]
-                saveBearingText = bearingText.text!
+                picker.selectRow(selectedBearingRow, inComponent: 0, animated: true)
+                saveBearingText = pickerData[selected]
             }
         
         
@@ -116,8 +137,9 @@ class SettingsViewController: UIViewController{
     //SAVE DOES NOT WORK, WHEN YOU OPEN IT AFTER SAVING, PREVIOUS VALUE NOT STORED
     @IBAction func saveButton(_ sender: Any) {
         print(distanceText.text)
-        distanceText.text = saveDistanceText
-        bearingText.text = saveBearingText
+        saveDistanceText = distanceText.text ?? ""
+        saveBearingText = bearingText.text ?? ""
+        delegate?.settingsChanged(distanceUnits: distanceUnits, bearingUnits: bearingUnits)
         self.navigationController?.dismiss(animated: true)
     }
   
