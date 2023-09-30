@@ -32,13 +32,25 @@ class SettingsViewController: UIViewController{
     
     var selectedDistanceRow = 0
     var selectedBearingRow = 0
+    
+    var selectedDistanceUnits: String = ""
+    var selectedBearingUnits: String = ""
+    var initialDistanceText: String = ""
+    var initialBearingText: String = ""
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         picker.dataSource = self
         picker.delegate = self
+        
+        selectedDistanceUnits = distanceText.text ?? ""
+        selectedBearingUnits = bearingText.text ?? ""
+        initialDistanceText = selectedDistanceUnits
+        initialBearingText = selectedBearingUnits
 
+        /*
         // Do any additional setup after loading the view.
         if picker.tag == 0 {
             self.pickerData = ["Kilometers", "Miles"]
@@ -66,7 +78,7 @@ class SettingsViewController: UIViewController{
         else {
             self.picker.selectRow(0, inComponent: 0, animated: true)
         }
-        
+        */
 
         let distanceTapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         distanceText.isUserInteractionEnabled = true
@@ -136,11 +148,18 @@ class SettingsViewController: UIViewController{
     
     //SAVE DOES NOT WORK, WHEN YOU OPEN IT AFTER SAVING, PREVIOUS VALUE NOT STORED
     @IBAction func saveButton(_ sender: Any) {
-        print(distanceText.text)
-        saveDistanceText = distanceText.text ?? ""
-        saveBearingText = bearingText.text ?? ""
-        delegate?.settingsChanged(distanceUnits: distanceUnits, bearingUnits: bearingUnits)
-        self.navigationController?.dismiss(animated: true)
+        selectedDistanceUnits = distanceText.text ?? ""
+            selectedDistanceUnits = bearingText.text ?? ""
+            
+            // Update the initial values for next time
+            initialDistanceText = selectedDistanceUnits
+            initialBearingText = selectedBearingUnits
+            
+            // Notify the delegate (if needed)
+            delegate?.settingsChanged(distanceUnits: selectedDistanceUnits, bearingUnits: selectedBearingUnits)
+            
+            // Dismiss the SettingsViewController
+            self.dismiss(animated: true, completion: nil)
     }
   
     }
@@ -154,15 +173,9 @@ class SettingsViewController: UIViewController{
     
     
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
+
 
 
 
@@ -187,8 +200,6 @@ extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate 
             self.bearingUnits = self.pickerData[row]
         }
     }
-    
-    
     
 }
 

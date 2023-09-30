@@ -41,19 +41,49 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         return (100*result).rounded()/100
     }
     
-    
+    var settingsViewController: SettingsViewController?
     
     @IBOutlet weak var distanceResult: UILabel!
     @IBOutlet weak var bearingResult: UILabel!
     
-    
-    
-    
     @IBAction func calcButton(_ sender: Any) {
-        latp1Val = Double(latp1.text!)!
-        latp2Val = Double(latp2.text!)!
-        distance = calculateDistance(a: latp1Val, b: latp2Val)
-        distanceResult.text = String(distance) + " \(distanceUnits)"
+           latp1Val = Double(latp1.text!)!
+           latp2Val = Double(latp2.text!)!
+           distance = calculateDistance(a: latp1Val, b: latp2Val)
+           distanceResult.text = String(distance) + " \(distanceUnits)"
+           
+           longp1Val = Double(longp1.text!)!
+           longp2Val = Double(longp2.text!)!
+           
+           let x = cos(latp2Val) * sin(abs(longp2Val - longp1Val))
+           let y = cos(latp1Val) * sin(latp2Val) - sin(latp1Val) * cos(latp2Val) * cos(abs(longp2Val - longp1Val))
+           bearingTemp = (100*(atan2(x,y) * 180.0 / Double.pi)).rounded() / 100
+           bearingResult.text = String(bearingTemp) + " \(bearingUnits)"
+           
+           self.view.endEditing(true)
+       }
+    
+    
+    
+    /*@IBAction func calcButton(_ sender: Any) {
+        //DistanceText is not properly getting the value from settingsViewController
+        if let DistanceText = settingsViewController?.distanceText.text{
+            if DistanceText == "Miles" {
+                distanceUnits = "Miles"
+                latp1Val = Double(latp1.text!)!
+                latp2Val = Double(latp2.text!)!
+                distance = (calculateDistance(a: latp1Val, b: latp2Val)) * 0.621371
+                print(distance)
+                distanceResult.text = String(distance ) + " \(distanceUnits)"
+            }
+            else if DistanceText == "Kilometers" {
+                latp1Val = Double(latp1.text!)!
+                latp2Val = Double(latp2.text!)!
+                distance = calculateDistance(a: latp1Val, b: latp2Val)
+                distanceResult.text = String(distance) + " \(distanceUnits)"
+            }
+        }
+            
         
         longp1Val = Double(longp1.text!)!
         longp2Val = Double(longp2.text!)!
@@ -65,6 +95,8 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         
         self.view.endEditing(true)
     }
+     
+     */
     
     
     @IBAction func clearButton(_ sender: Any) {
@@ -88,8 +120,8 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
         if segue.identifier == "goToSettings" {
             if let dest = segue.destination as? SettingsViewController {
                 dest.delegate = self
-                dest.bearingUnits = self.bearingUnits
                 dest.distanceUnits = self.distanceUnits
+                dest.bearingUnits = self.bearingUnits
             }
         }
     }
